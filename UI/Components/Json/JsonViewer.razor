@@ -1,0 +1,9 @@
+﻿
+<div class="json-viewer">
+    <input type="checkbox" checked="@this._colored" @onchange="this.ColoredChange" />
+    Farblich hinterlegen
+
+    <pre class="prettyprint">
+        @((MarkupString)this._formated)
+    </pre>
+</div>

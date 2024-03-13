@@ -1,0 +1,238 @@
+﻿* {
+    /*Colors*/
+    --dionysys-font-color: rgb(204, 204, 220);
+    --dionysys-font-color-transparent: rgba(255,255,255,0.1);
+    --dionysys-font-color-alternate: black;
+    --dionysys-bg: rgb(24, 27, 31);
+    --dionysys-bg-transparent: rgba(24, 27, 31, 0.1);
+    --dionysys-box-shadow: 0 0 0.5em var(--dionysys-green);
+    --dionysys-bg-lighter: #d0d0d0;
+    --dionysys-bg-darker: #d0d0d0;
+    --dionysys-green: rgb(16, 100, 0);
+    --dionysys-green-gradient: linear-gradient(to right, transparent 0%, var(--dionysys-green-transparent) 10%, var(--dionysys-green) 90%);
+    --dionysys-green-gradient-left: linear-gradient(to left, transparent 0%, var(--dionysys-green-transparent) 10%, var(--dionysys-green) 90%);
+    --dionysys-green-transparent: rgba(16, 100, 0, 0.1);
+    --forced-smartui-green: rgb(16, 100, 0);
+    --forced-smartui-green-gradient: linear-gradient(to right, transparent 0%, var(--forced-smartui-green-transparent) 10%, var(--forced-smartui-green) 90%);
+    --forced-smartui-green-gradient-left: linear-gradient(to left, transparent 0%, var(--forced-smartui-green-transparent) 10%, var(--forced-smartui-green) 90%);
+    --forced-smartui-green-transparent: rgba(16, 100, 0, 0.1);
+    --dionysys-red: rgb(150, 0, 0);
+    --dionysys-red-gradient: linear-gradient(to right, transparent 0%, var(--dionysys-red-transparent) 10%, var(--dionysys-red) 90%);
+    --dionysys-red-gradient-left: linear-gradient(to left, transparent 0%, var(--dionysys-red-transparent) 10%, var(--dionysys-red) 90%);
+    --dionysys-red-transparent: rgba(150, 0, 0, 0.1);
+    --dionysys-orange: rgb(200, 100, 0);
+    --dionysys-orange-gradient: linear-gradient(to right, transparent 0%, var(--dionysys-orange-transparent) 10%, var(--dionysys-orange) 90%);
+    --dionysys-orange-gradient-left: linear-gradient(to left, transparent 0%, var(--dionysys-orange-transparent) 10%, var(--dionysys-orange) 90%);
+    --dionysys-orange-transparent: rgba(200, 100, 0, 0.1);
+    --dionysys-lila-gradient: linear-gradient(to right, transparent 0%, var(--dionysys-lila-transparent) 10%, var(--dionysys-lila) 90%);
+    --dionysys-lila-gradient-left: linear-gradient(to left, transparent 0%, var(--dionysys-lila-transparent) 10%, var(--dionysys-lila) 90%);
+    --dionysys-lila: rgb(139, 0, 139);
+    --dionysys-lila-transparent: rgba(139, 0, 139, 0.1);
+    --dionysys-yellow-gradient: linear-gradient(to right, transparent 0%, var(--dionysys-yellow-transparent) 10%, var(--dionysys-yellow) 90%);
+    --dionysys-yellow-gradient-left: linear-gradient(to left, transparent 0%, var(--dionysys-yellow-transparent) 10%, var(--dionysys-yellow) 90%);
+    --dionysys-yellow: rgb(230, 200, 0);
+    --dionysys-yellow-transparent: rgba(230, 200, 0, 0.1);
+    --dionysys-blue-gradient: linear-gradient(to right, transparent 0%, var(--dionysys-blue-transparent) 10%, var(--dionysys-blue) 90%);
+    --dionysys-blue-gradient-left: linear-gradient(to left, transparent 0%, var(--dionysys-blue-transparent) 10%, var(--dionysys-blue) 90%);
+    --dionysys-blue: rgb(75, 75, 255);
+    --dionysys-blue-transparent: rgba(75, 75, 255, 0.1);
+    --dionysys-grey-gradient: linear-gradient(to right, transparent 0%, var(--dionysys-grey-transparent) 10%, var(--dionysys-grey) 90%);
+    --dionysys-grey-gradient-left: linear-gradient(to left, transparent 0%, var(--dionysys-grey-transparent) 10%, var(--dionysys-grey) 90%);
+    --dionysys-grey: rgb(128,128,128);
+    --dionysys-grey-transparent: rgba(128,128,128, 0.1);
+}
+
+html, body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background: var(--dionysys-bg);
+    color-scheme: dark;
+    color: var(--dionysys-font-color);
+}
+
+h1:focus {
+    outline: none;
+}
+
+a, .btn-link {
+    color: #0071c1;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+}
+
+.content {
+    padding-top: 1.1rem;
+}
+
+.valid.modified:not([type=checkbox]) {
+    outline: 1px solid #26b050;
+}
+
+.invalid {
+    outline: 1px solid red;
+}
+
+.validation-message {
+    color: red;
+}
+
+#blazor-error-ui {
+    background: lightyellow;
+    bottom: 0;
+    box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.2);
+    display: none;
+    left: 0;
+    padding: 0.6rem 1.25rem 0.7rem 1.25rem;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+}
+
+    #blazor-error-ui .dismiss {
+        cursor: pointer;
+        position: absolute;
+        right: 0.75rem;
+        top: 0.5rem;
+    }
+
+.blazor-error-boundary {
+    background: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTYiIGhlaWdodD0iNDkiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIG92ZXJmbG93PSJoaWRkZW4iPjxkZWZzPjxjbGlwUGF0aCBpZD0iY2xpcDAiPjxyZWN0IHg9IjIzNSIgeT0iNTEiIHdpZHRoPSI1NiIgaGVpZ2h0PSI0OSIvPjwvY2xpcFBhdGg+PC9kZWZzPjxnIGNsaXAtcGF0aD0idXJsKCNjbGlwMCkiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0yMzUgLTUxKSI+PHBhdGggZD0iTTI2My41MDYgNTFDMjY0LjcxNyA1MSAyNjUuODEzIDUxLjQ4MzcgMjY2LjYwNiA1Mi4yNjU4TDI2Ny4wNTIgNTIuNzk4NyAyNjcuNTM5IDUzLjYyODMgMjkwLjE4NSA5Mi4xODMxIDI5MC41NDUgOTIuNzk1IDI5MC42NTYgOTIuOTk2QzI5MC44NzcgOTMuNTEzIDI5MSA5NC4wODE1IDI5MSA5NC42NzgyIDI5MSA5Ny4wNjUxIDI4OS4wMzggOTkgMjg2LjYxNyA5OUwyNDAuMzgzIDk5QzIzNy45NjMgOTkgMjM2IDk3LjA2NTEgMjM2IDk0LjY3ODIgMjM2IDk0LjM3OTkgMjM2LjAzMSA5NC4wODg2IDIzNi4wODkgOTMuODA3MkwyMzYuMzM4IDkzLjAxNjIgMjM2Ljg1OCA5Mi4xMzE0IDI1OS40NzMgNTMuNjI5NCAyNTkuOTYxIDUyLjc5ODUgMjYwLjQwNyA1Mi4yNjU4QzI2MS4yIDUxLjQ4MzcgMjYyLjI5NiA1MSAyNjMuNTA2IDUxWk0yNjMuNTg2IDY2LjAxODNDMjYwLjczNyA2Ni4wMTgzIDI1OS4zMTMgNjcuMTI0NSAyNTkuMzEzIDY5LjMzNyAyNTkuMzEzIDY5LjYxMDIgMjU5LjMzMiA2OS44NjA4IDI1OS4zNzEgNzAuMDg4N0wyNjEuNzk1IDg0LjAxNjEgMjY1LjM4IDg0LjAxNjEgMjY3LjgyMSA2OS43NDc1QzI2Ny44NiA2OS43MzA5IDI2Ny44NzkgNjkuNTg3NyAyNjcuODc5IDY5LjMxNzkgMjY3Ljg3OSA2Ny4xMTgyIDI2Ni40NDggNjYuMDE4MyAyNjMuNTg2IDY2LjAxODNaTTI2My41NzYgODYuMDU0N0MyNjEuMDQ5IDg2LjA1NDcgMjU5Ljc4NiA4Ny4zMDA1IDI1OS43ODYgODkuNzkyMSAyNTkuNzg2IDkyLjI4MzcgMjYxLjA0OSA5My41Mjk1IDI2My41NzYgOTMuNTI5NSAyNjYuMTE2IDkzLjUyOTUgMjY3LjM4NyA5Mi4yODM3IDI2Ny4zODcgODkuNzkyMSAyNjcuMzg3IDg3LjMwMDUgMjY2LjExNiA4Ni4wNTQ3IDI2My41NzYgODYuMDU0N1oiIGZpbGw9IiNGRkU1MDAiIGZpbGwtcnVsZT0iZXZlbm9kZCIvPjwvZz48L3N2Zz4=) no-repeat 1rem/1.8rem, #b32121;
+    padding: 1rem 1rem 1rem 3.7rem;
+    color: white;
+}
+
+    .blazor-error-boundary::after {
+        content: "An error has occurred."
+    }
+
+.status-bar-safe-area {
+    display: none;
+}
+
+@supports (-webkit-touch-callout: none) {
+    .status-bar-safe-area {
+        display: flex;
+        position: sticky;
+        top: 0;
+        height: env(safe-area-inset-top);
+        background-color: #f7f7f7;
+        width: 100%;
+        z-index: 1;
+    }
+
+    .flex-column, .navbar-brand {
+        padding-left: env(safe-area-inset-left);
+    }
+}
+
+/*Modal*/
+.blazored-modal-container {
+    z-index: 902 !important;
+}
+
+.blazored-modal {
+    background-color: var(--dionysys-bg) !important;
+    border-color: var(--dionysys-green) !important;
+    color: var(--dionysys-font-color);
+    max-width: 80vw;
+    max-height: 80vh;
+    overflow: scroll;
+}
+
+    .blazored-modal .blazored-modal-close {
+        color: var(--dionysys-font-color);
+    }
+
+    .blazored-modal::-webkit-scrollbar {
+        display: none;
+    }
+
+.btn {
+}
+
+    .btn:active,
+    .btn:focus {
+        outline: none !important;
+        box-shadow: none !important;
+    }
+
+    .btn.btn-primary {
+        color: var(--dionysys-font-color);
+        background-color: var(--dionysys-green);
+        border-color: var(--dionysys-green);
+    }
+
+    .btn.btn-cancel {
+        color: var(--dionysys-font-color);
+        border: 1px solid var(--dionysys-green);
+    }
+
+input {
+    color-scheme: dark;
+    accent-color: var(--forced-smartui-green) !important;
+}
+
+select {
+    color-scheme: dark;
+}
+
+svg,
+svg text {
+    color: var(--dionysys-font-color) !important;
+    fill: var(--dionysys-font-color) !important;
+}
+
+.quickgrid {
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+    .quickgrid .col-options {
+        background: var(--dionysys-bg) !important;
+    }
+
+    .quickgrid .sort-indicator,
+    .quickgrid .col-options-button {
+        filter: invert();
+    }
+
+    .quickgrid tr:nth-child(2n) {
+        background-color: var(--dionysys-font-color-transparent);
+    }
+
+    .quickgrid tr td {
+    }
+
+        .quickgrid tr td:first-child {
+            border-top-left-radius: 0.5rem;
+            border-bottom-left-radius: 0.5rem;
+        }
+
+        .quickgrid tr td:last-child {
+            border-top-right-radius: 0.5rem;
+            border-bottom-right-radius: 0.5rem;
+        }
+
+.blazored-modal-container {
+    z-index: 902 !important;
+}
+
+.blazored-modal {
+    background-color: var(--dionysys-bg) !important;
+    color: var(--dionysys-font-color);
+    max-width: 80vw;
+    max-height: 80vh;
+    overflow: scroll;
+    border-color: var(--dionysys-green) !important;
+}
+
+    .blazored-modal .blazored-modal-close {
+        color: var(--dionysys-font-color);
+    }
+
+    .blazored-modal::-webkit-scrollbar {
+        display: none;
+    }
