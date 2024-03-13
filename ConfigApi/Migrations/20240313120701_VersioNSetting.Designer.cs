@@ -3,6 +3,7 @@ using System;
 using ConfigApi;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ConfigApi.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20240313120701_VersioNSetting")]
+    partial class VersioNSetting
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.2");
@@ -44,7 +47,7 @@ namespace ConfigApi.Migrations
                     b.Property<Guid>("ServiceId")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("SettingId")
+                    b.Property<int>("SettingId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Version")
@@ -94,7 +97,9 @@ namespace ConfigApi.Migrations
 
                     b.HasOne("ConfigApi.Model.Setting", "SettingObj")
                         .WithMany()
-                        .HasForeignKey("SettingId");
+                        .HasForeignKey("SettingId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("ServiceObj");
 

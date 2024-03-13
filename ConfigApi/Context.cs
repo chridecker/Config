@@ -7,6 +7,7 @@ namespace ConfigApi
     {
         public DbSet<Service> Services { get; set; }
         public DbSet<Setting> Settings { get; set; }
+        public DbSet<ServiceVersion> Versions { get; set; }
 
         public Context(DbContextOptions options) : base(options)
         {

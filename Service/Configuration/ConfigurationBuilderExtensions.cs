@@ -2,6 +2,7 @@
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Reflection;
+using System.Text;
 
 namespace Service.Configuration
 {
@@ -17,20 +18,21 @@ namespace Service.Configuration
             Token = cancellationToken,
         });
 
-        private static Stream LoadStreamSync(Task<Stream> streamTask, CancellationToken cancellationToken)
+        private static Stream LoadStreamSync(Task<string> streamTask, CancellationToken cancellationToken)
         {
-            if (streamTask.Wait(TimeSpan.FromSeconds(5), cancellationToken))
+            if (streamTask.Wait(TimeSpan.FromMinutes(1), cancellationToken))
             {
-                return streamTask.Result;
+                var byteArray = Encoding.UTF8.GetBytes(streamTask.Result);
+                return new MemoryStream(byteArray);
             }
             throw new Exception($"Error on load Configuration");
         }
 
-        private static Task<Stream> GetStreamTask(IHttpClientFactory factory, CancellationToken cancellationToken)
+        private static Task<string> GetStreamTask(IHttpClientFactory factory, CancellationToken cancellationToken)
         {
             var version = Assembly.GetExecutingAssembly().GetName().Version;
             var client = factory.CreateClient<ApiConfigurationProvider>();
-            return client.GetStreamAsync($"services/settings/{version}", cancellationToken);
+            return client.GetStringAsync($"services/settings/{version}", cancellationToken);
         }
     }
 }

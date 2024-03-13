@@ -5,7 +5,6 @@
       "environmentVariables": {
         "DOTNET_ENVIRONMENT": "Development",
         "Api": "http://localhost:5212/",
-       // "x-api-key": "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiVGVzdFNlcnZ1Y2UiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjAzMDlmNmFhLTdkMTQtNDgxMC1iODg4LWYyOTZhYTI3YmY5OSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2dpdmVubmFtZSI6IlRlc3RTZXJ2dWNlIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy92ZXJzaW9uIjoiMi4wLjI0MDYwLjIiLCJleHAiOjE3MTAzNDM5NzksImlzcyI6Im1ldGFsbGRldXRzY2guZGlvbnlzeXMubG9jYWwiLCJhdWQiOiJtZXRhbGxkZXV0c2NoLmRpb255c3lzLmxvY2FsIn0.rLqJkZx9Ll3Id7z65FVyr40ZvJvj79fYfNDpOsuT3FE"
       },
       "dotnetRunMessages": true,
       "applicationUrl": "http://localhost:5211"

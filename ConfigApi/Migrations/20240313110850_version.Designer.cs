@@ -3,6 +3,7 @@ using System;
 using ConfigApi;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ConfigApi.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20240313110850_version")]
+    partial class version
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.2");
@@ -44,9 +47,6 @@ namespace ConfigApi.Migrations
                     b.Property<Guid>("ServiceId")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("SettingId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("Version")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -54,8 +54,6 @@ namespace ConfigApi.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ServiceId");
-
-                    b.HasIndex("SettingId");
 
                     b.ToTable("Versions");
                 });
@@ -66,7 +64,7 @@ namespace ConfigApi.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<Guid>("ServiceId")
+                    b.Property<Guid>("ServiceVersionId")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Value")
@@ -79,7 +77,7 @@ namespace ConfigApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ServiceId");
+                    b.HasIndex("ServiceVersionId");
 
                     b.ToTable("Settings");
                 });
@@ -92,31 +90,28 @@ namespace ConfigApi.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ConfigApi.Model.Setting", "SettingObj")
-                        .WithMany()
-                        .HasForeignKey("SettingId");
-
                     b.Navigation("ServiceObj");
-
-                    b.Navigation("SettingObj");
                 });
 
             modelBuilder.Entity("ConfigApi.Model.Setting", b =>
                 {
-                    b.HasOne("ConfigApi.Model.Service", "ServiceObj")
+                    b.HasOne("ConfigApi.Model.ServiceVersion", "ServiceVersionObj")
                         .WithMany("Settings")
-                        .HasForeignKey("ServiceId")
+                        .HasForeignKey("ServiceVersionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("ServiceObj");
+                    b.Navigation("ServiceVersionObj");
                 });
 
             modelBuilder.Entity("ConfigApi.Model.Service", b =>
                 {
-                    b.Navigation("Settings");
-
                     b.Navigation("Versions");
+                });
+
+            modelBuilder.Entity("ConfigApi.Model.ServiceVersion", b =>
+                {
+                    b.Navigation("Settings");
                 });
 #pragma warning restore 612, 618
         }

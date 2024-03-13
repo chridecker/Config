@@ -14,7 +14,7 @@ namespace Service.Configuration
         public IServiceProvider Services { get; set; }
         public CancellationToken Token { get; set; }
 
-        public Func<IHttpClientFactory , CancellationToken, Task<Stream>> ReloadStream { get; set; }
+        public Func<IHttpClientFactory , CancellationToken, Task<string>> ReloadStream { get; set; }
         public override IConfigurationProvider Build(IConfigurationBuilder builder) => new ApiConfigurationProvider(this, this.ReloadSeconds)
         {
             ReloadStream = this.ReloadStream,

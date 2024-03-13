@@ -20,25 +20,20 @@ namespace ConfigApi.Services
             this._context = context;
         }
 
-        public async Task<string> BuildToken(Guid id, string version)
+        public async Task<string> BuildToken(Guid id)
         {
-            var service = await this.FindService(id, version);
-
+            var service = await this.FindService(id);
             var claims = new List<Claim>()
             {
                 new(ClaimTypes.Name, service.Name),
                 new(ClaimTypes.NameIdentifier, service.Id.ToString()),
                 new(ClaimTypes.GivenName, service.Name),
-                new(ClaimTypes.Version, version),
+                new(ClaimTypes.DateOfBirth, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")),
              };
-
-            var expiryDate = DateTime.Now.Add(this._optionsMonitor.CurrentValue?.TokenLifeTime ?? TimeSpan.FromMinutes(1));
 
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(this._optionsMonitor.CurrentValue.Key));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256Signature);
-            var tokenDescriptor = new JwtSecurityToken(this._optionsMonitor.CurrentValue.Issuer, this._optionsMonitor.CurrentValue.Issuer, claims,
-                expires: expiryDate, signingCredentials: credentials);
-
+            var tokenDescriptor = new JwtSecurityToken(this._optionsMonitor.CurrentValue.Issuer, this._optionsMonitor.CurrentValue.Issuer, claims, expires: DateTime.MaxValue, signingCredentials: credentials);
             return new JwtSecurityTokenHandler().WriteToken(tokenDescriptor);
         }
 
@@ -46,18 +41,16 @@ namespace ConfigApi.Services
         {
             var decrypt = new JwtSecurityTokenHandler().ReadJwtToken(jwt);
             var id = decrypt.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier) ?? throw new Exception($"No Claim with Type {nameof(ClaimTypes.NameIdentifier)}");
-            var version = decrypt.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Version) ?? throw new Exception($"No Claim with Type {nameof(ClaimTypes.Version)}");
-
-            return await this.FindService(Guid.Parse(id.Value), version.Value);
+            return await this.FindService(Guid.Parse(id.Value));
         }
 
-        private async Task<Service> FindService(Guid id, string version)
-            => await this._context.Services.FirstOrDefaultAsync(x => x.Id == id && x.Version == version) ?? throw new Exception("Konnte Service nicht in der Datenbank finden");
+        private async Task<Service> FindService(Guid id)
+            => await this._context.Services.Where(x => x.Id == id).FirstOrDefaultAsync() ?? throw new Exception("Konnte Service nicht in der Datenbank finden");
     }
 
     public interface IJwtTokenService
     {
-        Task<string> BuildToken(Guid id, string version);
+        Task<string> BuildToken(Guid id);
         Task<Service> ValidateToken(string jwt, CancellationToken token = default);
     }
 }

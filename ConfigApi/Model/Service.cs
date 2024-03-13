@@ -1,9 +1,16 @@
-﻿namespace ConfigApi.Model
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace ConfigApi.Model
 {
     public class Service
     {
         public Guid Id { get; set; }
         public string  Name { get; set; }
-        public string Version { get; set; }
+
+        [ForeignKey(nameof(ServiceVersion.ServiceId))]
+        public  ICollection<ServiceVersion> Versions { get; set; }
+        
+        [ForeignKey(nameof(Setting.ServiceId))]
+        public  ICollection<Setting> Settings { get; set; }
     }
 }

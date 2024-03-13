@@ -15,8 +15,7 @@ namespace Service.Configuration
 
         public IServiceProvider Services { get; set; }
         public CancellationToken Token { get; set; }
-
-        public Func<IHttpClientFactory, CancellationToken, Task<Stream>> ReloadStream { get; set; }
+        public Func<IHttpClientFactory, CancellationToken, Task<string>> ReloadStream { get; set; }
 
         public DateTime? LoadTime => this._loadedTime;
 
@@ -46,8 +45,9 @@ namespace Service.Configuration
 
         public async Task Reload(CancellationToken cancellationToken = default)
         {
-            using var stream = await this.ReloadStream(this.Services.GetRequiredService<IHttpClientFactory>(), cancellationToken);
-            base.Data.Clear();
+            var value = await this.ReloadStream(this.Services.GetRequiredService<IHttpClientFactory>(), cancellationToken);
+            var byteArray = Encoding.UTF8.GetBytes(value);
+            using var stream = new MemoryStream(byteArray);
             base.Load(stream);
             this._loadedTime = DateTime.Now;
             this.OnReload();

@@ -1,5 +1,6 @@
 using ConfigApi;
 using ConfigApi.Dtos;
+using ConfigApi.Extensions;
 using ConfigApi.Services;
 using ConfigApi.Settings;
 using Microsoft.AspNetCore.Authentication;
@@ -69,61 +70,27 @@ builder.Services.AddAuthentication(opt =>
 });
 builder.Services.AddAuthorization();
 
-
 var app = builder.Build();
-
 app.UseAuthentication();
 app.UseAuthorization();
-
 app.UseSwagger();
 app.UseSwaggerUI();
 
 var services = app.MapGroup("/services").WithTags("Services");
-
-services.MapPost("createtoken", async (CreateTokenDto dto, Context context, IJwtTokenService tokenAppService) =>
+services.MapPost("createtoken", async (Guid id, Context context, IJwtTokenService tokenAppService) =>
 {
-    var token = await tokenAppService.BuildToken(dto.Id, dto.Version.ToString());
-    if (!string.IsNullOrWhiteSpace(token))
-    {
-
-        return Results.Ok(new TokenDto { Token = token });
-    }
-    return Results.Unauthorized();
+    var token = await tokenAppService.BuildToken(id);
+    return string.IsNullOrWhiteSpace(token) ? Results.Unauthorized() : Results.Ok(new TokenDto { Token = token });
 }).WithName("createtoken");
 
-services.MapGet("validatetoken", async (IJwtTokenService tokenAppService, HttpContext httpContext, CancellationToken cancellationToken) =>
+services.MapGet("settings/{version}", async (Version version, ISettingAppService settinService, IJwtTokenService tokenAppService, HttpContext httpContext, CancellationToken cancellationToken = default) =>
 {
-    var token = await httpContext.GetTokenAsync("access_token");
-    var service = await tokenAppService.ValidateToken(token, cancellationToken);
-    if (!string.IsNullOrWhiteSpace(token))
-    {
-
-        return Results.Ok();
-    }
-    return Results.Unauthorized();
-})
-.RequireAuthorization()
-.WithName("validatetoken");
-
-
-services.MapGet("settings/{version}", async (Version version, ISettingAppService settinService, IJwtTokenService tokenAppService, HttpContext httpContext, CancellationToken cancellationToken) =>
-{
-    var token = await httpContext.GetTokenAsync("access_token");
+    var token = await httpContext.GetJWTTokenAsync();
     var service = await tokenAppService.ValidateToken(token, cancellationToken);
     var setting = await settinService.LoadServiceSetting(service.Id, version, cancellationToken);
     return setting.Value;
-    //var stream = new MemoryStream();
-    //using var writer = new StreamWriter(stream, leaveOpen: true);
-    //writer.Write(setting.Value);
-    //writer.Flush();
-    //stream.Position = 0;
-    //return Results.Stream(stream, "application/json");
 })
 .RequireAuthorization()
 .WithName("settings");
-
-services.MapGet("test", () => Results.Ok())
-.WithName("test")
-.WithOpenApi();
 
 app.Run();
