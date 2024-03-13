@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Components;
 using System.Text.Json;
 using System.Text.RegularExpressions;
+using UI.Constants;
 
 namespace UI.Components.Json
 {
@@ -41,8 +42,10 @@ namespace UI.Components.Json
 
             var config = JsonSerializer.Serialize(jsonElement, options: new()
             {
-                WriteIndented = true
+                WriteIndented = true,
             });
+
+            config = Regex.Unescape(config);
 
             if (this._colored)
             {
@@ -54,23 +57,19 @@ namespace UI.Components.Json
 
         private string ReplaceForHTMLColors(string value)
         {
-            var config = Regex.Replace(value, "&", "&amp;");
-            config = Regex.Replace(config, "<", "&lt;");
-            config = Regex.Replace(config, ">", "&gt;");
-
-            config = Regex.Replace(config, "(\"(\\\\u[a-zA-Z0-9]{4}|\\\\[^u]|[^\\\\\"])*\"(\\s*:)?|\\b(true|false|null)\\b|-?\\d+(?:\\.\\d*)?(?:[eE][+\\-]?\\d+)?)", delegate (Match m)
+            var config = RegexConstants.JsonTypes().Replace(value, delegate (Match m)
             {
                 var cls = "number";
-                if (Regex.Match(m.Value, "^\"").Success)
+                if (RegexConstants.JsonTypeText().Match(m.Value).Success)
                 {
-                    if (Regex.Match(m.Value, ":$").Success)
+                    if (RegexConstants.JsonTypeKey().Match(m.Value).Success)
                     {
                         cls = "key";
 
-                        var split = Regex.Split(m.Value, "(?<=\").*(?=\")");
+                        var split = RegexConstants.JsonTextValue().Split(m.Value);
                         if (split.Length == 2)
                         {
-                            return $"{split[0]}<span class=key>{Regex.Match(m.Value, "(?<=\").*(?=\")").Value}</span>{split[1]}";
+                            return $"{split[0]}<span class=key>{RegexConstants.JsonTextValue().Match(m.Value).Value}</span>{split[1]}";
                         }
                     }
                     else
@@ -78,11 +77,11 @@ namespace UI.Components.Json
                         cls = "string";
                     }
                 }
-                else if (Regex.Match(m.Value, "true|false").Success)
+                else if (RegexConstants.JsonTypeString().Match(m.Value).Success)
                 {
                     cls = "boolean";
                 }
-                else if (Regex.Match(m.Value, "null").Success)
+                else if (RegexConstants.JsonTypeNull().Match(m.Value).Success)
                 {
                     cls = "null";
                 }
@@ -90,12 +89,12 @@ namespace UI.Components.Json
                 return $"<span class={cls}>{m}</span>";
             });
 
-            config = Regex.Replace(config, "\\[|\\]", delegate (Match m)
+            config = RegexConstants.JsonTypeSquareBraket().Replace(config, delegate (Match m)
             {
                 return $"<span class=squarebraket>{m}</span>";
             });
 
-            config = Regex.Replace(config, "{|}", delegate (Match m)
+            config = RegexConstants.JsonTypeCurvedBraket().Replace(config, delegate (Match m)
             {
                 return $"<span class=curvedbraket>{m}</span>";
             });
