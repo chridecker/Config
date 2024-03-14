@@ -1,15 +1,14 @@
-using ConfigApi;
-using ConfigApi.Dtos;
 using ConfigApi.Extensions;
 using ConfigApi.Services;
 using ConfigApi.Settings;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
+using DataAccess;
+using DataAccess.Dtos;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();

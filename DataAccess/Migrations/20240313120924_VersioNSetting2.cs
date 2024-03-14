@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace ConfigApi.Migrations
+namespace DataAccess.Migrations
 {
     /// <inheritdoc />
     public partial class VersioNSetting2 : Migration

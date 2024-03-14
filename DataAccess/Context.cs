@@ -1,7 +1,7 @@
-﻿using ConfigApi.Model;
+﻿using DataAccess.Model;
 using Microsoft.EntityFrameworkCore;
 
-namespace ConfigApi
+namespace DataAccess
 {
     public class Context : DbContext
     {

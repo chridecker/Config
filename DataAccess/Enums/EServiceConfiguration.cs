@@ -1,4 +1,4 @@
-﻿namespace ConfigApi.Dtos
+﻿namespace DataAccess.Enums
 {
     public enum EServiceConfiguration : byte
     {
