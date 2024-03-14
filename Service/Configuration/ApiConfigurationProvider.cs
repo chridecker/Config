@@ -18,6 +18,7 @@ namespace Service.Configuration
         public Func<IHttpClientFactory, CancellationToken, Task<string>> ReloadStream { get; set; }
 
         public DateTime? LoadTime => this._loadedTime;
+        public IReadOnlyDictionary<string, string> CurrentData => this.Data.ToDictionary();
 
         public ApiConfigurationProvider(JsonStreamConfigurationSource source, int? reloadSeconds) : base(source)
         {

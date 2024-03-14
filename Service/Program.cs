@@ -14,7 +14,15 @@ builder.Services
 
 builder.Configuration.AddApiSettings(builder.Services.BuildServiceProvider());
 
-builder.Services.AddHealthChecks().AddCheck<ApiConfigurationHealthCheck>("basic", tags: ["tag"]);
+builder.Services.AddHealthChecks().AddCheck<ApiConfigurationHealthCheck>(nameof(ApiConfigurationHealthCheck));
+
+builder.Services.AddHealthChecksUI(opt =>
+{
+    opt.SetEvaluationTimeInSeconds(15);
+    opt.MaximumHistoryEntriesPerEndpoint(10);
+    opt.SetApiMaxActiveRequests(1);
+    opt.AddHealthCheckEndpoint("default api", "/health");
+}).AddInMemoryStorage();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -29,7 +37,12 @@ app.UseSwaggerUI();
 
 app.UseHealthChecks("/health", new HealthCheckOptions
 {
-    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse,
+});
+
+app.MapHealthChecksUI(opt =>
+{
+    opt.UIPath= "/health-ui";
 });
 
 var group = app.MapGroup("/service").WithTags("Service");

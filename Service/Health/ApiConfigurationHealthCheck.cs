@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Service.Configuration;
+using System.Reflection;
 
 namespace Service.Health
 {
@@ -20,7 +21,10 @@ namespace Service.Health
 
             var dict = new Dictionary<string, object>
             {
-                ["apiConfiguration.loadTime"] = apiProvider.LoadTime
+                ["apiConfiguration.loadTime"] = apiProvider.LoadTime,
+                ["apiConfiguration.version"] = Assembly.GetExecutingAssembly().GetName().Version,
+                ["apiConfiguration.data"] = apiProvider.CurrentData,
+
             };
 
             return Task.FromResult(HealthCheckResult.Healthy("OK", dict));
