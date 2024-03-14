@@ -14,7 +14,13 @@ builder.Services
 
 builder.Configuration.AddApiSettings(builder.Services.BuildServiceProvider());
 
-builder.Services.AddHealthChecks().AddCheck<ApiConfigurationHealthCheck>(nameof(ApiConfigurationHealthCheck));
+builder.Services.AddHealthChecks()
+    .AddCheck<ApiConfigurationHealthCheck>(nameof(ApiConfigurationHealthCheck))
+    .AddWorkingSetHealthCheck(1024)
+    .AddDiskStorageHealthCheck(opt => {
+        opt.AddDrive("c:\\",1024*20);
+        opt.AddDrive("f:\\",1024*20);
+    });
 
 builder.Services.AddHealthChecksUI(opt =>
 {
