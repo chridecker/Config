@@ -16,7 +16,7 @@ namespace UI.Components.Base
 
         protected virtual Func<DbSet<T>, IIncludableQueryable<T, object>>? Include => null;
 
-        protected override async Task OnParametersSetAsync()
+        protected override async Task OnInitializedAsync()
         {
             if (this.Include is null)
             {
@@ -29,7 +29,7 @@ namespace UI.Components.Base
                     .FirstOrDefaultAsync(x => x.Id == this.Id) ?? throw new Exception($"Konnte Service mit ID [{this.Id}] nicht finden");
             }
 
-            await base.OnParametersSetAsync();
+            await base.OnInitializedAsync();
         }
     }
 }

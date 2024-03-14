@@ -22,11 +22,11 @@ namespace UI.Components.Create
         private Setting? _setting;
         private EServiceConfiguration _configuration;
 
-        protected override async Task OnParametersSetAsync()
+        protected override async Task OnInitializedAsync()
         {
             try
             {
-                await base.OnParametersSetAsync();
+                await base.OnInitializedAsync();
 
                 this._version = VersionHelper.CreateNewVersion(this._entity.LatestVersion?.Version);
                 this._setting = this._entity.LatestSetting;

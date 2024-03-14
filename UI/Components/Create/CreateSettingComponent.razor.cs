@@ -23,11 +23,11 @@ namespace UI.Components.Create
         private string _version;
         private string _value;
 
-        protected override async Task OnParametersSetAsync()
+        protected override async Task OnInitializedAsync()
         {
             try
             {
-                await base.OnParametersSetAsync();
+                await base.OnInitializedAsync();
 
                 this._version = VersionHelper.CreateNewVersion(this._entity.LatestSetting?.Version);
                 this._value = this._entity.LatestSetting?.Value;
