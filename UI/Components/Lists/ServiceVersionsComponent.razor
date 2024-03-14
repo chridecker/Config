@@ -4,6 +4,6 @@
     <TemplateColumn Title="">
         <button class="btn btn-primary" @onclick="@(() => this.OpenDetail(context))">Öffnen</button>
     </TemplateColumn>
-    <PropertyColumn Property="x => x.Version" />
-    <PropertyColumn Property="x => x.ServiceConfiguration" />
+    <PropertyColumn Property="x => x.Version" Sortable="true" IsDefaultSortColumn />
+    <PropertyColumn Property="x => x.ServiceConfiguration" Sortable="true" />
 </QuickGrid>

@@ -5,5 +5,5 @@
         <button class="btn btn-primary" @onclick="@(() => this.OpenDetail(context))">Öffnen</button>
     </TemplateColumn>
     <PropertyColumn Property="x => x.Id" />
-    <PropertyColumn Property="x => x.Name" />
+    <PropertyColumn Property="x => x.Name" Sortable="true" IsDefaultSortColumn />
 </QuickGrid>
