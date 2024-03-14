@@ -1,4 +1,5 @@
-﻿using ConfigApi.Model;
+﻿using DataAccess;
+using DataAccess.Model;
 using Microsoft.EntityFrameworkCore;
 
 namespace ConfigApi.Services

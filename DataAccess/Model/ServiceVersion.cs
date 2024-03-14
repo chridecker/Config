@@ -1,8 +1,8 @@
-﻿using ConfigApi.Dtos;
+﻿using DataAccess.Enums;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Reflection.Metadata.Ecma335;
 
-namespace ConfigApi.Model
+namespace DataAccess.Model
 {
     public class ServiceVersion
     {

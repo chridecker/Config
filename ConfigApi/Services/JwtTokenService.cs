@@ -1,4 +1,4 @@
-﻿using ConfigApi.Model;
+﻿using DataAccess.Model;
 using ConfigApi.Settings;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
@@ -6,6 +6,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using DataAccess;
 
 namespace ConfigApi.Services
 {

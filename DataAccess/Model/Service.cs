@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace ConfigApi.Model
+namespace DataAccess.Model
 {
     public class Service
     {

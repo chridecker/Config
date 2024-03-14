@@ -1,4 +1,4 @@
-﻿namespace ConfigApi.Dtos
+﻿namespace DataAccess.Dtos
 {
     public class TokenDto
     {
