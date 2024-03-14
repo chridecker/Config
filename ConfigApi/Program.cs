@@ -45,7 +45,7 @@ builder.Services.AddTransient<IJwtTokenService, JwtTokenService>();
 
 builder.Services.AddDbContext<Context>(opt =>
 {
-    opt.UseSqlite($"Data Source={(Path.Combine(Directory.GetCurrentDirectory(), "database.db"))}");
+    opt.UseSqlite($"Data Source={(Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory())?.FullName, "database.db"))}");
 });
 
 builder.Services.AddHttpContextAccessor();
