@@ -33,6 +33,16 @@ namespace UI.Components.Pages
 
         private async Task CreateSetting()
         {
+            var param = new ModalParameters();
+            param.Add(nameof(Id), this.Id);
+
+            var modal = this._modal.Show<CreateSettingComponent>("Neue Einstellung für " + this._entity.Name, param);
+            var modalResult = await modal.Result;
+
+            if (!modalResult.Cancelled && modalResult.Data is Setting setting)
+            {
+                await this.InvokeAsync(StateHasChanged);
+            }
 
         }
     }

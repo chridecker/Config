@@ -9,5 +9,6 @@
         public const string Setting = $"/setting/{RouteParameterConstants.Id}";
         public const string CreateService = $"/createService";
         public const string CreateServiceVersion = $"/createServiceVersion/{RouteParameterConstants.Id}";
+        public const string CreateSetting = $"/createSetting/{RouteParameterConstants.Id}";
     }
 }

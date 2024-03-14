@@ -39,7 +39,7 @@
             if (!int.TryParse(split[2][..2], out var year)) { throw new Exception($"Konnte [{split[2][..2]}] nicht zu einer Zahl parsen"); }
             if (!int.TryParse(split[2][2..], out var dayOfYear)) { throw new Exception($"Konnte [{split[2][2..]}] nicht zu einer Zahl parsen"); }
 
-            this.Date = new DateOnly(year+2000, 1, 1).AddDays(dayOfYear - 1);
+            this.Date = new DateOnly(year + 2000, 1, 1).AddDays(dayOfYear - 1);
         }
 
         public override string ToString() => $"{this.Major}.0.{this.Date:yy}{this.Date.DayOfYear:000}.{this.Minor}";
