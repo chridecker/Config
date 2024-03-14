@@ -1,0 +1,6 @@
+﻿@page "/"
+@using UI.Components.Json
+
+<InputTextArea @bind-Value="this._currentConfig" />
+
+<JsonViewer Value="@this._currentConfig" />

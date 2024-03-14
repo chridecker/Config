@@ -1,0 +1,35 @@
+﻿.json-viewer {
+    border: 1px solid var(--dionysys-font-color);
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+}
+
+    .json-viewer .prettyprint {
+        border-top: 1px solid var(--dionysys-font-color);
+        padding-top: 0.5rem;
+    }
+
+        .json-viewer .prettyprint ::deep .string {
+            color: palevioletred;
+        }
+
+        .json-viewer .prettyprint ::deep .number {
+            color: seagreen;
+        }
+
+        .json-viewer .prettyprint ::deep .boolean,
+        .json-viewer .prettyprint ::deep .null {
+            color: steelblue;
+        }
+
+        .json-viewer .prettyprint ::deep .key {
+            color: lightblue;
+        }
+
+        .json-viewer .prettyprint ::deep .curvedbraket {
+            color: yellow;
+        }
+
+        .json-viewer .prettyprint ::deep .squarebraket {
+            color: magenta;
+        }
