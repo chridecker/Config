@@ -1,0 +1,13 @@
+﻿@attribute [Route(RouteConstants.CreateService)]
+
+@if (!string.IsNullOrWhiteSpace(this._error))
+{
+    <Alert Level="EAlertLevel.Error">@this._error</Alert>
+}
+
+<div class="create-container">
+    <label>Name</label>
+    <InputText @bind-Value="this._name" />
+
+    <button class="btn btn-primary" @onclick="this.Submit">Übernehmen</button>
+</div>

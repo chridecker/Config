@@ -1,8 +1,4 @@
 ﻿
-.version {
-    font-weight: 600;
-}
-
 .create-container {
     display: grid;
     grid-template-columns: max-content auto;
