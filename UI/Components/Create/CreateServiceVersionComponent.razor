@@ -1,0 +1,39 @@
+﻿@attribute [Route(RouteConstants.CreateServiceVersion)]
+@inherits BaseEntityComponent<Service>
+@using DataAccess.Enums
+@using UI.Components.Base
+
+@if (!string.IsNullOrWhiteSpace(this._error))
+{
+    <Alert Level="EAlertLevel.Error">@this._error</Alert>
+}
+
+<div class="create-container">
+    <label>Version</label>
+    <div class="version">@this._version</div>
+
+    <label>Konfiguration</label>
+    <InputSelect @bind-Value="this._configuration">
+        @foreach (var configuration in Enum.GetValues(typeof(EServiceConfiguration)))
+        {
+            <option value="@configuration">@configuration</option>
+        }
+    </InputSelect>
+
+    <label>Einstellung</label>
+    @if (this._entity.Settings.Any())
+    {
+        <InputSelect @bind-Value="this._setting">
+            @foreach (var setting in this._entity.Settings)
+            {
+                <option value="@setting">@setting.Version</option>
+            }
+        </InputSelect>
+    }
+    else
+    {
+        <Alert Level="EAlertLevel.Warning">Keine Einstellungen bei Service definiert</Alert>
+    }
+
+    <button class="btn btn-primary" @onclick="this.Submit">Übernehmen</button>
+</div>

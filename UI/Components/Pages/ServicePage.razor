@@ -18,5 +18,8 @@
         <div class="version">@this._latest.Version</div>
     }
 
+    <button class="btn btn-primary" @onclick="this.CreateVersion">Neue Version</button>
+    <button class="btn btn-primary" @onclick="this.CreateSetting">Neue Einstellung</button>
+
     <ServiceVersionsComponent ServiceVersions="this._entity.Versions" />
 }

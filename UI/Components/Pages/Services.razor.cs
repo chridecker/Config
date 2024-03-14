@@ -11,5 +11,10 @@ namespace UI.Components.Pages
         [Inject] private NavigationHandler _navigationHandler { get; set; }
 
         private void OpenDetail(Service service) => this._navigationHandler.NavigateToEntity(service);
+
+        private async Task CreateService()
+        {
+
+        }
     }
 }

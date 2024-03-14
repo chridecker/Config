@@ -1,4 +1,5 @@
 ﻿using DataAccess;
+using DionySys.UI.Shared.Contracts.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using UI.Services;
@@ -17,6 +18,8 @@ namespace UI.Extensions
             services.AddQuickGridEntityFrameworkAdapter();
 
             services.AddScoped<NavigationHandler>();
+
+            services.AddScoped<IUIHandler, UIHandler>();
 
             return services;
         }

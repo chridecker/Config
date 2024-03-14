@@ -1,0 +1,15 @@
+﻿
+.version {
+    font-weight: 600;
+}
+
+.create-container {
+    display: grid;
+    grid-template-columns: max-content auto;
+    grid-gap: 0.25rem 0.5rem;
+    padding: 0 0.5rem;
+}
+
+    .create-container .btn {
+        grid-column-end: span 2;
+    }

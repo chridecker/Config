@@ -7,5 +7,6 @@
         public const string Service = $"/service/{RouteParameterConstants.Id}";
         public const string ServiceVersion = $"/serviceVersion/{RouteParameterConstants.Id}";
         public const string Setting = $"/setting/{RouteParameterConstants.Id}";
+        public const string CreateServiceVersion = $"/createServiceVersion/{RouteParameterConstants.Id}";
     }
 }
