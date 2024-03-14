@@ -1,0 +1,9 @@
+﻿@using DataAccess.Model
+
+<QuickGrid Items="this.ServiceVersions.AsQueryable()">
+    <TemplateColumn Title="">
+        <button class="btn btn-primary" @onclick="@(() => this.OpenDetail(context))">Öffnen</button>
+    </TemplateColumn>
+    <PropertyColumn Property="x => x.Version" />
+    <PropertyColumn Property="x => x.ServiceConfiguration" />
+</QuickGrid>

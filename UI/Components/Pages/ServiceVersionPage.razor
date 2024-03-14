@@ -1,0 +1,17 @@
+﻿@attribute [Route(RouteConstants.ServiceVersion)]
+@inherits BaseEntityComponent<ServiceVersion>
+@using DataAccess.Model
+@using UI.Components.Base
+@using UI.Components.Json
+
+<div class="version">@this._entity.Version</div>
+<div class="configuration">@this._entity.ServiceConfiguration</div>
+
+@if (this._entity.SettingObj is null)
+{
+    <Alert Level="EAlertLevel.Warning">Keine JSON Config vorhanden</Alert>
+}
+else
+{
+    <JsonViewer Value="@this._entity.SettingObj.Value" />
+}

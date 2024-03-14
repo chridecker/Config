@@ -1,0 +1,9 @@
+﻿@attribute [Route(RouteConstants.Services)]
+
+<QuickGrid Items="this._context.Services">
+    <TemplateColumn Title="">
+        <button class="btn btn-primary" @onclick="@(() => this.OpenDetail(context))">Öffnen</button>
+    </TemplateColumn>
+    <PropertyColumn Property="x => x.Id" />
+    <PropertyColumn Property="x => x.Name" />
+</QuickGrid>

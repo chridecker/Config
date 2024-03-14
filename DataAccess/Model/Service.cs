@@ -2,15 +2,16 @@
 
 namespace DataAccess.Model
 {
-    public class Service
+    public class Service : BaseEntity
     {
-        public Guid Id { get; set; }
-        public string  Name { get; set; }
+        public string Name { get; set; }
+
+        public ServiceVersion? LatestVersion => this.Versions.OrderByDescending(x => x.Version).FirstOrDefault();
 
         [ForeignKey(nameof(ServiceVersion.ServiceId))]
-        public  ICollection<ServiceVersion> Versions { get; set; }
-        
+        public ICollection<ServiceVersion> Versions { get; set; }
+
         [ForeignKey(nameof(Setting.ServiceId))]
-        public  ICollection<Setting> Settings { get; set; }
+        public ICollection<Setting> Settings { get; set; }
     }
 }

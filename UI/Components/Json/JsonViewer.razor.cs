@@ -33,7 +33,10 @@ namespace UI.Components.Json
             JsonElement jsonElement;
             try
             {
-                jsonElement = JsonSerializer.Deserialize<JsonElement>(this.Value);
+                jsonElement = JsonSerializer.Deserialize<JsonElement>(this.Value, options: new()
+                {
+                    AllowTrailingCommas = true
+                });
             }
             catch (JsonException ex)
             {

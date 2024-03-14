@@ -1,0 +1,22 @@
+﻿@attribute [Route(RouteConstants.Service)]
+@inherits BaseEntityComponent<Service>
+@using DataAccess.Model
+@using UI.Components.Base
+@using UI.Components.Json
+@using UI.Components.Lists
+
+@if (this._entity is not null)
+{
+    <div class="name">@this._entity.Name</div>
+
+    @if (this._latest is null)
+    {
+        <Alert Level="EAlertLevel.Warning">Keine letzte Version vorhanden</Alert>
+    }
+    else
+    {
+        <div class="version">@this._latest.Version</div>
+    }
+
+    <ServiceVersionsComponent ServiceVersions="this._entity.Versions" />
+}

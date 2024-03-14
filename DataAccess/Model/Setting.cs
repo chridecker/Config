@@ -2,13 +2,12 @@
 
 namespace DataAccess.Model
 {
-    public class Setting
+    public class Setting : BaseEntity
     {
-        public int Id { get; set; }
 
         [ForeignKey(nameof(ServiceObj))]
         public Guid ServiceId { get; set; }
-        
+
         public string Version { get; set; }
         public string Value { get; set; }
 

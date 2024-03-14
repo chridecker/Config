@@ -3,7 +3,7 @@
     public enum EServiceConfiguration : byte
     {
         None = 0,
-        Develpment = 1,
+        Development = 1,
         Test = 2,
         Release = 3
     }
